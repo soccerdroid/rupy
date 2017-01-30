@@ -21,6 +21,8 @@ class Parser
     # If the AST is nil then there was an error during parsing
     # we need to report a simple error message to help the user
     if(tree.nil?)
+      puts @@parser.failure_reason
+      
       raise Exception, "Parse error at offset: #{@@parser.index}"
     end
     
@@ -31,7 +33,7 @@ class Parser
     
     # Convert the AST into an array representation of the input
     # structure and return it
-    return tree.to_array
+    return tree
   end
   
   private

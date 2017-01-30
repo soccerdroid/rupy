@@ -7,12 +7,38 @@
 grammar Sexp
 
   rule expression
-    space? '(' body ')' space? <Expression>
+    (declareOpenFile / forLoop) space? newLine*
   end
-  
-  rule body
-    (expression / identifier / float / integer / string / space )* <Body>
+
+  rule declareOpenFile
+   space? word space? '=' space? openFile
   end
+
+  rule printFunction
+    'print' space? (word/string)
+  end
+  rule forLoop
+    'for' space? word space? 'in' space? word space? ':' '\n' ('\t' expression)+ 
+  end
+
+  rule openFile
+    'open' space? '(' ( word / string ) space? (',' (('"' / '\'') ('r'/'w'/'a'/'r+'/'w+'/'a+')) ('"' / '\''))? space? ')'
+  end
+
+
+ # rule number
+  #  '-'? [1-9] [0-9]*
+  #end
+
+  #rule conditional_sentence
+  #  conditional_keyword word (!conditional_keyword)+ [ \t]+ word*
+  #end
+  #rule condition
+  #  ('not')? word ('and'/'or') word
+  #end
+  #rule conditional_keyword
+  #    'if' / 'while'
+  #  end
 
   rule integer
     ('+' / '-')? [0-9]+ <IntegerLiteral>
@@ -21,17 +47,21 @@ grammar Sexp
   rule float
     ('+' / '-')? [0-9]+ (('.' [0-9]+) / ('e' [0-9]+)) <FloatLiteral>
   end
-  
-  rule string
-    '"' ([^"\\] / "\\" . )* '"' <StringLiteral>
-  end
-  
-  rule identifier
-    [a-zA-Z\=\*] [a-zA-Z0-9_\=\*]* <Identifier>
-  end
 
   rule space
     [\s]+
+  end
+
+  rule string
+    '"' ([^"\\] / "\\" . )* '"' <StringLiteral>
+  end
+
+  rule newLine
+    [\n]+
+  end
+
+  rule word
+      [a-zA-Z]+
   end
   
 end
