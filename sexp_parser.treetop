@@ -7,16 +7,26 @@
 grammar Sexp
 
   rule expression
-    (declareOpenFile / forLoop) space? newLine*
+    (declareVar / forLoop / printFunction / openFile) space? newLine*
   end
 
-  rule declareOpenFile
-   space? word space? '=' space? openFile
+  rule declareVar
+   space? word space? '=' space? value / callFunction
   end
 
   rule printFunction
-    'print' space? (word/string)
+    'print' space? parenthesized_letter
   end
+ 
+  rule callFunction
+    word space? '(' space? ( value space? (',' space? value space? )*)? ')'
+  end
+  rule parenthesized_letter
+    '(' parenthesized_letter ')'
+    /
+    (value/callFunction) (',' parenthesized_letter)*
+  end
+
   rule forLoop
     'for' space? word space? 'in' space? word space? ':' '\n' ('\t' expression)+ 
   end
@@ -25,10 +35,6 @@ grammar Sexp
     'open' space? '(' ( word / string ) space? (',' (('"' / '\'') ('r'/'w'/'a'/'r+'/'w+'/'a+')) ('"' / '\''))? space? ')'
   end
 
-
- # rule number
-  #  '-'? [1-9] [0-9]*
-  #end
 
   #rule conditional_sentence
   #  conditional_keyword word (!conditional_keyword)+ [ \t]+ word*
@@ -39,6 +45,10 @@ grammar Sexp
   #rule conditional_keyword
   #    'if' / 'while'
   #  end
+
+  rule value
+    word/string/integer/float
+  end
 
   rule integer
     ('+' / '-')? [0-9]+ <IntegerLiteral>
@@ -61,7 +71,7 @@ grammar Sexp
   end
 
   rule word
-      [a-zA-Z]+
+      [a-zA-Z]+[0-9]*[a-zA-Z]*
   end
   
 end
