@@ -1,0 +1,82 @@
+# This file contains the PEG grammar definition that
+# Treetop uses to generate our parser.
+#
+# For more information check out the Treetop site:
+# http://treetop.rubyforge.org/
+
+
+grammar Sexp
+
+  rule expression
+    (declareVar / forLoop / printFunction / openFile) space? newLine*
+  end
+
+  rule declareVar
+   space? word space? '=' space? value / callFunction
+  end
+
+  rule printFunction
+    'print' space? parenthesized_letter
+  end
+ 
+  rule callFunction
+    word space? '(' space? ( value space? (',' space? value space? )*)? ')'
+  end
+  rule parenthesized_letter
+    '(' parenthesized_letter ')'
+    /
+    (value/callFunction) (',' parenthesized_letter)*
+  end
+
+  rule forLoop
+    'for' space? word space? 'in' space? word space? ':' '\n' ('\t' expression)+ 
+  end
+    
+  rule splitCollection
+    word '.' space? '(' string ')' 
+  end
+
+  rule openFile
+    'open' space? '(' ( word / string ) space? (',' (('"' / '\'') ('r'/'w'/'a'/'r+'/'w+'/'a+')) ('"' / '\''))? space? ')'
+  end
+
+
+  #rule conditional_sentence
+  #  conditional_keyword word (!conditional_keyword)+ [ \t]+ word*
+  #end
+  #rule condition
+  #  ('not')? word ('and'/'or') word
+  #end
+  #rule conditional_keyword
+  #    'if' / 'while'
+  #  end
+
+  rule value
+    word/string/integer/float
+  end
+
+  rule integer
+    ('+' / '-')? [0-9]+ <IntegerLiteral>
+  end
+  
+  rule float
+    ('+' / '-')? [0-9]+ (('.' [0-9]+) / ('e' [0-9]+)) <FloatLiteral>
+  end
+
+  rule space
+    [\s]+
+  end
+
+  rule string
+    '"' ([^"\\] / "\\" . )* '"' <StringLiteral>
+  end
+
+  rule newLine
+    [\n]+
+  end
+
+  rule word
+      [a-zA-Z]+ [0-9]* [a-zA-Z]*
+  end
+  
+end

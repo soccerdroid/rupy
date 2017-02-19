@@ -4,10 +4,11 @@
 # For more information check out the Treetop site:
 # http://treetop.rubyforge.org/
 
+
 grammar Sexp
 
   rule expression
-    (declareVar / forLoop / printFunction / openFile) space? newLine*
+    (declareVar / forLoop / printFunction / writeFile) space? newLine*
   end
 
   rule declareVar
@@ -19,8 +20,9 @@ grammar Sexp
   end
  
   rule callFunction
-    word space? '(' space? ( value space? (',' space? value space? )*)? ')'
+    word space? '(' space? ( value space? (',' space? value space? )*)? ')' / splitCollection / stripCollection / openFile
   end
+  
   rule parenthesized_letter
     '(' parenthesized_letter ')'
     /
@@ -28,13 +30,24 @@ grammar Sexp
   end
 
   rule forLoop
-    'for' space? word space? 'in' space? word space? ':' '\n' ('\t' expression)+ 
+    'for' space? word space? 'in' space? word space? ':' newLine* ('\t' expression)+ 
   end
+    
+  rule splitCollection
+    word '.split' space? '(' (string / word) ')' 
+  end
+  
+  rule stripCollection
+    word '.strip'space? '()'
 
+  end
   rule openFile
     'open' space? '(' ( word / string ) space? (',' (('"' / '\'') ('r'/'w'/'a'/'r+'/'w+'/'a+')) ('"' / '\''))? space? ')'
   end
-
+    
+  rule writeFile
+    word '.write' space? '(' (string / word) ')'
+  end
 
   #rule conditional_sentence
   #  conditional_keyword word (!conditional_keyword)+ [ \t]+ word*
@@ -71,7 +84,7 @@ grammar Sexp
   end
 
   rule word
-      [a-zA-Z]+[0-9]*[a-zA-Z]*
+      [a-zA-Z]+ [0-9]* [a-zA-Z]*
   end
   
 end
