@@ -8,7 +8,7 @@
 grammar Sexp
 
   rule expression
-    (declareVar / forLoop / printFunction / writeFile) space? newLine*
+    (declareVar / forLoop / printFunction / openFile) space? newLine*
   end
 
   rule declareVar
@@ -20,9 +20,8 @@ grammar Sexp
   end
  
   rule callFunction
-    word space? '(' space? ( value space? (',' space? value space? )*)? ')' / splitCollection / stripCollection / openFile
+    word space? '(' space? ( value space? (',' space? value space? )*)? ')'
   end
-  
   rule parenthesized_letter
     '(' parenthesized_letter ')'
     /
@@ -30,24 +29,27 @@ grammar Sexp
   end
 
   rule forLoop
-    'for' space? word space? 'in' space? word space? ':' newLine* ('\t' expression)+ 
+    'for' space? word space? 'in' space? word space? ':' '\n' ('\t' expression)+ 
   end
     
   rule splitCollection
-    word '.split' space? '(' (string / word) ')' 
+    word '.' space? '(' string ')' 
   end
-  
-  rule stripCollection
-    word '.strip'space? '()'
 
-  end
   rule openFile
     'open' space? '(' ( word / string ) space? (',' (('"' / '\'') ('r'/'w'/'a'/'r+'/'w+'/'a+')) ('"' / '\''))? space? ')'
   end
-    
-  rule writeFile
-    word '.write' space? '(' (string / word) ')'
-  end
+
+
+  #rule conditional_sentence
+  #  conditional_keyword word (!conditional_keyword)+ [ \t]+ word*
+  #end
+  #rule condition
+  #  ('not')? word ('and'/'or') word
+  #end
+  #rule conditional_keyword
+  #    'if' / 'while'
+  #  end
 
   rule value
     word/string/integer/float
@@ -72,7 +74,6 @@ grammar Sexp
   rule newLine
     [\n]+
   end
-
 
   rule word
       [a-zA-Z]+ [0-9]* [a-zA-Z]*
