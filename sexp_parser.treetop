@@ -36,16 +36,6 @@ grammar Sexp
   end
 
 
-  #rule conditional_sentence
-  #  conditional_keyword word (!conditional_keyword)+ [ \t]+ word*
-  #end
-  #rule condition
-  #  ('not')? word ('and'/'or') word
-  #end
-  #rule conditional_keyword
-  #    'if' / 'while'
-  #  end
-
   rule value
     word/string/integer/float
   end
@@ -70,8 +60,28 @@ grammar Sexp
     [\n]+
   end
 
-  rule word
-      [a-zA-Z]+[0-9]*[a-zA-Z]*
+
+
+  rule variable
+    !keyword (
+      super {
+        def bind(value, env)
+          env.merge(name => value)
+        end
+
+        def to_s(env={})
+          env.has_key?(name) ? env[name].to_s : name
+      end
+      }
+    )
+  end
+  
+  rule keyword
+    ('if' / 'else' /'open') !non_space_char
+  end
+  
+  rule non_space_char
+    ![ \n] .
   end
   
 end
