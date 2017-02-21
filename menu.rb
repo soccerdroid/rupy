@@ -63,8 +63,17 @@ while true
 		puts (lista[5])
 	when 7
 		puts (lista[6])
+		puts("Para remnombrar un archivo o directorio, haremos uso de una librería llamada os.Toda librería se debe de importar, y de buena práctica, al inicio del archivo python.")
+		puts("#!/usr/bin/python \nimport os n\ os.rename(\"test1.txt\", \"test2.txt\" )")
+		puts("Escriba la sentencia que permita renombrar un archivo llamado ,\"ciudadesEcuador.txt\" a \"ciudadesArgentina.csv\"")
+		renombrar=gets
 	when 8
 		puts (lista[7])
+		puts("Para archivos con grandes cantidades de datos (muy pesados), podemos definir el tamaño del buffer en bytes, para no cargar toda esa información a memoria, lo cual retardaría la ejecución. ")
+		puts("Digamos que tenemos un archivo llamado output.txt, y queremos agregar datos de otro archivo, informacion.csv, con un peso de 3 GB. Nuestro código se vería de la siguiente forma:")
+		puts("f=open(\"infomacion.csv\",buffering=2000000) \n output=open(\"output.txt\",\"a\")\n for line in f: \n\t output.write(line.strip())")
+		puts("¿Cómo cambiaría el código, si ahora debemos disminuir el tamaño del buffer a 1 millón de bytes, y se quiere sobreescribir el archivo output.txt?")
+		archivo_buffer=gets
 	when 9
 		puts (lista[8])
 	when 10
