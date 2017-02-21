@@ -1,5 +1,5 @@
 #ruby 1.9.3 
-lista=["Nivel 1: Sintaxis básica parte I","Nivel 2: Sintaxis básica parte II","Nivel 3: Leyendo un archivo parte I","Nivel 4: Leyendo un archivo parte II","Nivel 5: Escribiendo en un archivo","Nivel 6: Escribiendo vacío","Nivel 7: Formatos","Nivel 8: Streams", "Nivel 9: Un mini programa", "Nivel 10: Buscando en otros archivos" ]
+lista=["Nivel 1: Sintaxis básica parte I","Nivel 2: Sintaxis básica parte II","Nivel 3: Leyendo un archivo parte I","Nivel 4: Leyendo un archivo parte II","Nivel 5: Escribiendo en un archivo","Nivel 6: Dame un número y te diré qué línea es","Nivel 7: Formatos","Nivel 8: Buffers", "Nivel 9: Un mini programa", "Nivel 10: Buscando en otros archivos" ]
 
 def numeric?(lookAhead)
   lookAhead =~ /[[:digit:]]/
@@ -61,24 +61,39 @@ while true
 		programa_escritura=gets	
 	when 6
 		puts (lista[5])
+		puts("En esta ocasión, aprenderemos a leer una línea en específico de un archivo. Para lograrlo, haremos uso de la librería linecache")
+		puts("Como toda librería, debemos de importarla, y al inicio: \n import linecache")
+		puts("Si queremos obtener la quinta línea de nuestro archivo, no necesitamos abrirlo: \n linea=linecache.getline(\"archivo.docx\",4)")
+		puts("Los índices, al igual que en las listas, comienzan desde cero, por eso, la quinta línea se representa con el índice 4")
+		puts("Escriba la sentencia que permita leer la 20 línea de un archivo llamado \"animales.txt\"")
+		leer_linea=gets
+
+		
 	when 7
 		puts (lista[6])
-		puts("Para remnombrar un archivo o directorio, haremos uso de una librería llamada os.Toda librería se debe de importar, y de buena práctica, al inicio del archivo python.")
+		puts("Para renombrar un archivo o directorio, haremos uso de una librería llamada os.Toda librería se debe de importar, y de buena práctica, al inicio del archivo python.")
 		puts("#!/usr/bin/python \nimport os n\ os.rename(\"test1.txt\", \"test2.txt\" )")
 		puts("Escriba la sentencia que permita renombrar un archivo llamado ,\"ciudadesEcuador.txt\" a \"ciudadesArgentina.csv\"")
 		renombrar=gets
 	when 8
 		puts (lista[7])
 		puts("Para archivos con grandes cantidades de datos (muy pesados), podemos definir el tamaño del buffer en bytes, para no cargar toda esa información a memoria, lo cual retardaría la ejecución. ")
-		puts("Digamos que tenemos un archivo llamado output.txt, y queremos agregar datos de otro archivo, informacion.csv, con un peso de 3 GB. Nuestro código se vería de la siguiente forma:")
-		puts("f=open(\"infomacion.csv\",buffering=2000000) \n output=open(\"output.txt\",\"a\")\n for line in f: \n\t output.write(line.strip())")
+		puts("Digamos que tenemos un archivo llamado output.txt,con un peso de 3 GB, y queremos imprimir sus datos por pantalla.Como el archivo es muy pesado, configuramos el tamaño de lectura del buffer a 2000000 bytes.\n Nuestro código se vería de la siguiente forma:")
+		puts("f=open(\"output.txt\",buffering=2000000)\n for line in f: \n\t print line")
 		puts("¿Cómo cambiaría el código, si ahora debemos disminuir el tamaño del buffer a 1 millón de bytes, y se quiere sobreescribir el archivo output.txt?")
 		archivo_buffer=gets
 	when 9
 		puts (lista[8])
+		puts("En este nivel aplicaremos lectura y escritura de ficheros.")
+		puts("Ya hemos aprendido a iterar sobre las líneas de un archivo, y abrir un archivo con permiso para escribir al final de éste.")
+		puts("Elabore un programa que lea un archivo llamado \" lectura.csv\", y por cada línea que lea de éste, la escriba al final de otro archivo, llamado \" escritura.txt\".El archivo de lectura es muy pesado, por lo que hay que primero, configurar el tamaño de su buffer a 1 millón de bytes.")
+		lectura_escritura=gets
 	when 10
 		puts (lista[9])
+		puts("¡Este es el último nivel! Para finalizar con este tutorial, pondremos en práctica todo lo aprendido hasta ahora.")
+		puts("Escriba un programa que abra un archivo de nombre \"final.txt\", almacene los datos de cada línea en un arreglo y los escriba en otro archivo,\"nuevo-archivo.txt\".")
+		puts("El tamaño del buffer debe ser de 1500000 bytes")
 	else
-		puts "KFDNGJFD!"
+		puts ("KFDNGJFD!")
 	end
-end
+		
