@@ -7,13 +7,13 @@
 
 grammar Sexp
 
-  rule expression
-    (forLoop / printFunction / writeFile /splitCollection / stripCollection / declareVar) space? newLine* <Expression>
+  rule exp
+    (forLoop / printFunction / writeFile /splitCollection / stripCollection / declareVar ) space? newLine* exp? <Expression>
   end
 
 
   rule forLoop
-    'for' space? word space? 'in' space? word space? ':' newLine ([\t] expression)+ <ForLoop>
+    'for' space? word space? 'in' space? word space? ':' newLine ([\t] exp)+ <ForLoop>
   end
 
   rule declareVar
