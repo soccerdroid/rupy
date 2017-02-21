@@ -15,6 +15,7 @@ class Rupy
   end
 
   def self.readMultipleLines()
+  	puts "Para dejar de escribir ingresa \"Rupy!\""
   	input= ""
   	while(tmp_input != "Rupy!")
   		tmp_input = gets
