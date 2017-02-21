@@ -21,10 +21,7 @@ class Parser
     # If the AST is nil then there was an error during parsing
     # we need to report a simple error message to help the user
     if(tree.nil?)
-      puts @@parser.failure_reason
-      puts @@parser.failure_line
-      puts @@parser.failure_column
-      raise Exception, "Parse error at offset: #{@@parser.index}"
+      raise Exception, "\nTienes un error en la columna: #{@@parser.index} \n La razón: #{@@parser.failure_reason}"
     end
 
     # Remove all syntax nodes that aren't one of our custom

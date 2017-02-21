@@ -27,7 +27,8 @@ while true
 		puts("Esta sentencia permite abrir un archivo para poder leerlo. Escriba la sentencia que permita abrir un archivo con el nombre \"lectura.txt\",ubicado en el mismo directorio de su archivo python")		
         abrir_archivo=gets	
         res = Rupy.test(abrir_archivo)
-        p res
+        puts res.state
+        puts res.msg
         puts("Es una buena práctica que, luego de trabajado, se cierre un archivo. Para esto, existe el método: close(), el cual cierra un archivo. \n f = open(\"archivo.txt\", \"r\") \n f.close()")
 		puts("Escriba la sentencia que cierre el archivo archivo=open(\"prueba2.txt\")")
 		cerrar_archivo=gets

@@ -25,7 +25,7 @@ grammar Sexp
   end
  
   rule callFunction
-     splitCollection / stripCollection / openFile / (word space? '(' space? ( value space? (',' space? value space? )*)? ')')
+     lineCache / splitCollection / stripCollection / openFile / (word space? '(' space? ( value space? (',' space? value space? )*)? ')')
   end
   
   rule parenthesized_letter
