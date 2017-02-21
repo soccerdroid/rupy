@@ -41,13 +41,17 @@ while true
 		escribir=gets
 	when 3
 		puts (lista[2])
-		puts("La operación más sencilla a realizar sobre un archivo es leer su contenido. Para procesarlo línea por línea, es posible hacerlo de la siguiente forma:
-
-\n for línea in archivo:
-    \n \t \t# procesar línea
-\nDe esta manera, la variable línea irá almacenando distintas cadenas correspondientes a cada una de las líneas del archivo.")
+		puts("La operación más sencilla a realizar sobre un archivo es leer su contenido. Para procesarlo línea por línea, es posible hacerlo de la siguiente forma:\n for línea in archivo:\n \t \t# procesar línea\nDe esta manera, la variable línea irá almacenando distintas cadenas correspondientes a cada una de las líneas del archivo.")		
+		puts("Escriba la línea de código que me permita imprimir cada línea de un archivo almacenado en la variable archivo, usar función print))")	
+		leer_lineas=gets
 	when 4
 		puts (lista[3])
+		puts("Luego de saber leer cada línea de un archivo, éstas se pueden manipular de todo tipo de formas.Un uso muy común para los ficheros es almacenar registros con datos separados por un caracter escogido. \nEn este nivel, aprenderemos a separa una línea de acuerdo a un caracter cualquiera.")
+		puts("En python, contamos con la funcion split(caracter) la cual separa una cadena dada de acuerdo al caracter ingresado como parámetro, \n y retorna un arreglo con las subcadenas formadas")
+ 		puts("Otra función usada antes de separar las cadenas, es strip() la cual elminina los espacios en blanco al final de una línea")
+		puts("Digamos que queremos leer un archivo cuyas líneas se componen de datos de usuarios, separados por comas.\n El código que usaríamos se vería de la siguiente forma:\n f=open(\"archivo.txt\") \n for line in f:\n \t\t sinespacios=line.strip() \n datos=line.split(\",\") ")
+		puts("¿Cómo cambiaría el código, si en vez de coma, tuviese un \"|\" como separador de los datos?")
+		separando=gets	
 	when 5
 		puts (lista[4])
 	when 6
