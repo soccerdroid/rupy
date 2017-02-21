@@ -8,11 +8,16 @@
 grammar Sexp
 
   rule expression
-    (declareVar / forLoop / printFunction / writeFile) space? newLine*
+    (forLoop / printFunction / writeFile /splitCollection / stripCollection / declareVar) space? newLine* <Expression>
+  end
+
+
+  rule forLoop
+    'for' space? word space? 'in' space? word space? ':' newLine ([\t] expression)+ <ForLoop>
   end
 
   rule declareVar
-   space? word space? '=' space? value / callFunction
+   space? word space? '=' space? (callFunction / value)
   end
 
   rule printFunction
@@ -20,7 +25,7 @@ grammar Sexp
   end
  
   rule callFunction
-    word space? '(' space? ( value space? (',' space? value space? )*)? ')' / splitCollection / stripCollection / openFile
+     splitCollection / stripCollection / openFile / word space? '(' space? ( value space? (',' space? value space? )*)? ')'
   end
   
   rule parenthesized_letter
@@ -29,28 +34,25 @@ grammar Sexp
     (value/callFunction) (',' parenthesized_letter)*
   end
 
-  rule forLoop
-    'for' space? word space? 'in' space? word space? ':' newLine* ('\t' expression)+ 
-  end
     
   rule splitCollection
     word '.split' space? '(' (string / word) ')' 
   end
   
   rule stripCollection
-    word '.strip'space? '()'
+    word '.strip' space? '()'
 
   end
   rule openFile
-    'open' space? '(' ( word / string ) space? (',' (('"' / '\'') ('r'/'w'/'a'/'r+'/'w+'/'a+')) ('"' / '\''))? space? ')'
+    'open' space? '(' ( word / string ) space? ( ',' ( ('"' / '\'') ( 'r' / 'w' / 'a' / 'r+' / 'w+' / 'a+' ) ) )? space? ')' <File>
   end
     
   rule writeFile
-    word '.write' space? '(' (string / word) ')'
+    word '.write' space? '(' (string / word) ')' 
   end
 
   rule value
-    word/string/integer/float
+    word / string / integer / float
   end
 
   rule integer
@@ -75,7 +77,7 @@ grammar Sexp
 
 
   rule word
-      [a-zA-Z]+ [0-9]* [a-zA-Z]*
+      [a-zA-Z]+ [0-9]* [a-zA-Z]* <Variable>
   end
   
 end

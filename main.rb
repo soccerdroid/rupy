@@ -1,8 +1,4 @@
 require_relative 'parser'
-str = 'for a in b:\n\t open("jajajaj")'
-str1= 'open("archivo.txt")'
-str2= "for line in archivo"
-str3='asd=open(b,"w")'
+str = File.read("test_example.py")
 puts str
-a=Parser.parse(str)
-puts a.to_s
+p Parser.parse(str)
