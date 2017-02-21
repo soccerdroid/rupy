@@ -21,11 +21,11 @@ grammar Sexp
   end
 
   rule printFunction
-    'print' space? parenthesized_letter <Function
+    'print' space? parenthesized_letter 
   end
  
   rule callFunction
-     splitCollection / stripCollection / openFile / word space? '(' space? ( value space? (',' space? value space? )*)? ')'
+     splitCollection / stripCollection / openFile space? '(' space? ( value space? (',' space? value space? )*)? ')'
   end
   
   rule parenthesized_letter
