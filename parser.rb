@@ -22,17 +22,19 @@ class Parser
     # we need to report a simple error message to help the user
     if(tree.nil?)
       puts @@parser.failure_reason
-      
+  puts @@parser.failure_line
+  puts @@parser.failure_column
       raise Exception, "Parse error at offset: #{@@parser.index}"
     end
     
     # Remove all syntax nodes that aren't one of our custom
     # classes. If we don't do this we will end up with a *lot*
     # of essentially useless nodes
-    self.clean_tree(tree)
+    #self.clean_tree(tree)
     
     # Convert the AST into an array representation of the input
     # structure and return it
+    #return tree.to_array
     return tree
   end
   
