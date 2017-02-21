@@ -23,6 +23,13 @@ module Sexp
     end
   end
 
+
+  class ArrayLiteral < Treetop::Runtime::SyntaxNode
+    def to_array
+      return self.elements.map {|x| x.to_array}
+    end
+  end
+
   class Identifier < Treetop::Runtime::SyntaxNode
     def to_array
       return self.text_value.to_sym
@@ -62,6 +69,11 @@ module Sexp
 
 
   class Declare < Treetop::Runtime::SyntaxNode
+    def to_array
+      return self.elements.map {|x| x.to_array}
+    end
+  end
+  class CloseFile < Treetop::Runtime::SyntaxNode
     def to_array
       return self.elements.map {|x| x.to_array}
     end

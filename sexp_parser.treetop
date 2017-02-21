@@ -8,8 +8,8 @@
 grammar Sexp
 
   rule exp
-    (forLoop / printFunction / writeFile /splitCollection / stripCollection / declareVar ) space? newLine* exp? <Expression>
-  end
+    (forLoop / printFunction / writeFile / closeFile / splitCollection / stripCollection / declareVar)  space?  newLine* exp? <Expression>
+  end 
 
 
   rule forLoop
@@ -25,7 +25,7 @@ grammar Sexp
   end
  
   rule callFunction
-     splitCollection / stripCollection / openFile space? '(' space? ( value space? (',' space? value space? )*)? ')'
+     lineCache / splitCollection / stripCollection / openFile / (word space? '(' space? ( value space? (',' space? value space? )*)? ')')
   end
   
   rule parenthesized_letter
@@ -43,6 +43,11 @@ grammar Sexp
     word '.strip' space? '()' 
 
   end
+
+  rule closeFile
+    word '.close' space? '()' <CloseFile>
+  end
+
   rule openFile
     'open' space? '(' ( word / string ) space? ( ',' ( ('"' / '\'') ( 'r' / 'w' / 'a' / 'r+' / 'w+' / 'a+' ) ) )? space? ')' <File>
   end
@@ -52,9 +57,12 @@ grammar Sexp
   end
 
   rule value
-    word / string / integer / float
+    word / string / integer / float / array
   end
 
+  rule array
+    '[' value (',' value)* ']' <ArrayLiteral>
+  end
   rule integer
     ('+' / '-')? [0-9]+ <IntegerLiteral>
   end

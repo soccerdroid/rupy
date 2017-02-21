@@ -1,5 +1,10 @@
 #ruby 1.9.3 
-lista=["Nivel 1: Sintaxis básica parte I","Nivel 2: Sintaxis básica parte II","Nivel 3: Leyendo un archivo parte I","Nivel 4: Leyendo un archivo parte II","Nivel 5: Escribiendo en un archivo","Nivel 6: Dame un número y te diré qué línea es","Nivel 7: Formatos","Nivel 8: Buffers", "Nivel 9: Un mini programa", "Nivel 10: Buscando en otros archivos" ]
+
+require_relative 'main'
+lista=["Nivel 1: Sintaxis básica parte I","Nivel 2: Sintaxis básica parte II","Nivel 3: Leyendo un archivo parte I","Nivel 4: Leyendo un archivo parte II","Nivel 5: Escribiendo en un archivo","Nivel 6: Dame un número y te diré qué línea es","Nivel 7: Renombrando archivos","Nivel 8: Buffers", "Nivel 9: Un mini programa", "Nivel 10: Buscando en otros archivos" ]
+
+
+
 
 def numeric?(lookAhead)
   lookAhead =~ /[[:digit:]]/
@@ -24,6 +29,9 @@ while true
 		puts("En Python, para abrir un archivo usaremos la función open, que recibe el nombre del archivo a abrir,si es que este se encuentra en el mismo directorio que nuestro archivo de python. Caso contrario, se usará la ruta completa del archivo.\n f = open(\"archivo.txt\") \n Esta función intentará abrir el archivo con el nombre indicado. Si tiene éxito, devolverá una variable que nos permitirá manipular el archivo de diversas maneras.")
 		puts("Esta sentencia permite abrir un archivo para poder leerlo. Escriba la sentencia que permita abrir un archivo con el nombre \"lectura.txt\",ubicado en el mismo directorio de su archivo python")		
         abrir_archivo=gets	
+        res = Rupy.test(abrir_archivo)
+        puts res.state
+        puts res.msg
         puts("Es una buena práctica que, luego de trabajado, se cierre un archivo. Para esto, existe el método: close(), el cual cierra un archivo. \n f = open(\"archivo.txt\", \"r\") \n f.close()")
 		puts("Escriba la sentencia que cierre el archivo archivo=open(\"prueba2.txt\")")
 		cerrar_archivo=gets
@@ -41,7 +49,7 @@ while true
 		escribir=gets
 	when 3
 		puts (lista[2])
-		puts("La operación más sencilla a realizar sobre un archivo es leer su contenido. Para procesarlo línea por línea, es posible hacerlo de la siguiente forma:\n for línea in archivo:\n \t# procesar línea\nDe esta manera, la variable línea irá almacenando distintas cadenas correspondientes a cada una de las líneas del archivo.")		
+		puts("La operación más sencilla a realizar sobre un archivo es leer su contenido. Para procesarlo línea por línea, es posible hacerlo de la siguiente forma:\n for línea in archivo:\n\t# procesar línea\nDe esta manera, la variable línea irá almacenando distintas cadenas correspondientes a cada una de las líneas del archivo.")		
 		puts("Escriba la línea de código que me permita imprimir cada línea de un archivo almacenado en la variable archivo, usar función print))")	
 		leer_lineas=gets
 	when 4
@@ -49,14 +57,14 @@ while true
 		puts("Luego de saber leer cada línea de un archivo, éstas se pueden manipular de todo tipo de formas.Un uso muy común para los ficheros es almacenar registros con datos separados por un caracter escogido. \nEn este nivel, aprenderemos a separa una línea de acuerdo a un caracter cualquiera.")
 		puts("En python, contamos con la funcion split(caracter) la cual separa una cadena dada de acuerdo al caracter ingresado como parámetro, \n y retorna un arreglo con las subcadenas formadas")
  		puts("Otra función usada antes de separar las cadenas, es strip() la cual elminina los espacios en blanco al final de una línea")
-		puts("Digamos que queremos leer un archivo cuyas líneas se componen de datos de usuarios, separados por comas.\n El código que usaríamos se vería de la siguiente forma:\n f=open(\"archivo.txt\") \n for line in f:\n \t sinespacios=line.strip() \n datos=line.split(\",\") ")
+		puts("Digamos que queremos leer un archivo cuyas líneas se componen de datos de usuarios, separados por comas.\n El código que usaríamos se vería de la siguiente forma:\nf=open(\"archivo.txt\")\nfor line in f:\n\tsinespacios=line.strip()\n\tdatos=line.split(\",\") ")
 		puts("¿Cómo cambiaría el código, si en vez de coma, tuviese un \"|\" como separador de los datos?")
 		separando=gets	
 	when 5
 		puts (lista[4])
 		puts("Ahora, aprenderemos a escribir líneas sobre un archivo. Digamos que se tienen todos los datos de usuarios en un arreglo datos[],y nos solicitan guardar esa información.\n Nos tocaría entonces, iterar sobre ese arreglo, y escribir cada elemento sobre el archivo.")
 		puts("Nuestro código se vería como a continuacón:")
-		puts("file=open(\"datos_usuarios.txt\",\"w\") \n datos=[\"datos user1\",\"datos user2\",...] \n for datos in dato: \n\t file.write(dato)") 	
+		puts("file=open(\"datos_usuarios.txt\",\"w\")\ndatos=[\"datos user1\",\"datos user2\",...]\nfor datos in dato:\n\tfile.write(dato)") 	
 		puts("Suponga que tiene el mismo arreglo de datos, pero ahora tiene que agregarlos a un archivo existente, \"datos_antiguos.txt\".\nEscriba un programa que permita escribir estos datos sobre ese archivo: ")	
 		programa_escritura=gets	
 	when 6
@@ -71,8 +79,13 @@ while true
 		
 	when 7
 		puts (lista[6])
+<<<<<<< HEAD
 		puts("Para renombrar un archivo o directorio, haremos uso de una librería llamada os.Toda librería se debe de importar, y de buena práctica, al inicio del archivo python.")
 		puts("#!/usr/bin/python \nimport os n\ os.rename(\"test1.txt\", \"test2.txt\" )")
+=======
+		puts("Para remnombrar un archivo o directorio, haremos uso de una librería llamada os.Toda librería se debe de importar, y de buena práctica, al inicio del archivo python.")
+		puts("#!/usr/bin/python \nimport os\nos.rename(\"test1.txt\", \"test2.txt\" )")
+>>>>>>> 912ace2fcc58799c820a10a7548bdc2b836e3246
 		puts("Escriba la sentencia que permita renombrar un archivo llamado ,\"ciudadesEcuador.txt\" a \"ciudadesArgentina.csv\"")
 		renombrar=gets
 	when 8
