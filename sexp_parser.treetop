@@ -17,11 +17,11 @@ grammar Sexp
   end
 
   rule declareVar
-   space? word space? '=' space? (callFunction / value)
+   space? word space? '=' space? (callFunction / value) <Declare>
   end
 
   rule printFunction
-    'print' space? parenthesized_letter
+    'print' space? parenthesized_letter <Function
   end
  
   rule callFunction
@@ -40,7 +40,7 @@ grammar Sexp
   end
   
   rule stripCollection
-    word '.strip' space? '()'
+    word '.strip' space? '()' 
 
   end
   rule openFile

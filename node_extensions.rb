@@ -59,4 +59,11 @@ module Sexp
       return self.elements.map {|x| x.to_array}
     end
   end
+
+
+  class Declare < Treetop::Runtime::SyntaxNode
+    def to_array
+      return self.elements.map {|x| x.to_array}
+    end
+  end
 end
