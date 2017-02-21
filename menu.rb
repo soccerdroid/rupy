@@ -1,4 +1,6 @@
 #ruby 1.9.3 
+
+require_relative 'main'
 lista=["Nivel 1: Sintaxis básica parte I","Nivel 2: Sintaxis básica parte II","Nivel 3: Leyendo un archivo parte I","Nivel 4: Leyendo un archivo parte II","Nivel 5: Escribiendo en un archivo","Nivel 6: Escribiendo vacío","Nivel 7: Formatos","Nivel 8: Streams", "Nivel 9: Un mini programa", "Nivel 10: Buscando en otros archivos" ]
 
 def numeric?(lookAhead)
@@ -24,6 +26,8 @@ while true
 		puts("En Python, para abrir un archivo usaremos la función open, que recibe el nombre del archivo a abrir,si es que este se encuentra en el mismo directorio que nuestro archivo de python. Caso contrario, se usará la ruta completa del archivo.\n f = open(\"archivo.txt\") \n Esta función intentará abrir el archivo con el nombre indicado. Si tiene éxito, devolverá una variable que nos permitirá manipular el archivo de diversas maneras.")
 		puts("Esta sentencia permite abrir un archivo para poder leerlo. Escriba la sentencia que permita abrir un archivo con el nombre \"lectura.txt\",ubicado en el mismo directorio de su archivo python")		
         abrir_archivo=gets	
+        res = Rupy.test(abrir_archivo)
+        p res
         puts("Es una buena práctica que, luego de trabajado, se cierre un archivo. Para esto, existe el método: close(), el cual cierra un archivo. \n f = open(\"archivo.txt\", \"r\") \n f.close()")
 		puts("Escriba la sentencia que cierre el archivo archivo=open(\"prueba2.txt\")")
 		cerrar_archivo=gets

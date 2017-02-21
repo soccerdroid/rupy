@@ -8,7 +8,7 @@
 grammar Sexp
 
   rule exp
-    (forLoop / printFunction / writeFile / splitCollection / stripCollection / declareVar)  space?  newLine* exp? <Expression>
+    (forLoop / printFunction / writeFile / closeFile / splitCollection / stripCollection / declareVar)  space?  newLine* exp? <Expression>
   end 
 
 
@@ -43,6 +43,11 @@ grammar Sexp
     word '.strip' space? '()' 
 
   end
+
+  rule closeFile
+    word '.close' space? '()' <CloseFile>
+  end
+
   rule openFile
     'open' space? '(' ( word / string ) space? ( ',' ( ('"' / '\'') ( 'r' / 'w' / 'a' / 'r+' / 'w+' / 'a+' ) ) )? space? ')' <File>
   end
