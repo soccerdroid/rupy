@@ -44,7 +44,7 @@ while true
         puts("Es una buena práctica que, luego de trabajado, se cierre un archivo. Para esto, existe el método: close(), el cual cierra un archivo. \n f = open(\"archivo.txt\", \"r\") \n f.close()")
 		puts("Escriba la sentencia que cierre el archivo archivo=open(\"prueba2.txt\")")
 		cerrar_archivo=gets
-		res = Rupy.test(cerrar_archivos)
+		res = Rupy.test(cerrar_archivo)
         puts res.state
         puts res.msg
 		while(res.state!=1)
@@ -52,7 +52,7 @@ while true
 			puts("Es una buena práctica que, luego de trabajado, se cierre un archivo. Para esto, existe el método: close(), el cual cierra un archivo. \n f = open(\"archivo.txt\", \"r\") \n f.close()")
 			puts("Escriba la sentencia que cierre el archivo archivo=open(\"prueba2.txt\")")
 			cerrar_archivo=gets
-			res = Rupy.test(cerrar_archivos)
+			res = Rupy.test(cerrar_archivo)
 		    puts res.state
 		    puts res.msg
 		end
@@ -235,7 +235,7 @@ while true
 		puts("¡Este es el último nivel! Para finalizar con este tutorial, pondremos en práctica todo lo aprendido hasta ahora.")
 		puts("Escriba un programa que abra un archivo de nombre \"final.txt\", almacene los datos de cada línea en un arreglo y los escriba en otro archivo,\"nuevo-archivo.txt\".")
 		puts("El tamaño del buffer debe ser de 1500000 bytes")
-        ejercicio=gets        
+        ejercicio=Rupy.readMultipleLines()   
         res = Rupy.test(ejercicio)
         puts res.state
         puts res.msg
@@ -243,7 +243,7 @@ while true
             puts("Incorrecto!")
             puts("Escriba un programa que abra un archivo de nombre \"final.txt\", almacene los datos de cada línea en un arreglo y los escriba en otro archivo,\"nuevo-archivo.txt\".")
 		    puts("El tamaño del buffer debe ser de 1500000 bytes")
-            ejercicio=gets        
+            ejercicio=Rupy.readMultipleLines()         
             res = Rupy.test(ejercicio)
             puts res.state
             puts res.msg

@@ -13,7 +13,7 @@ grammar Sexp
 
 
   rule forLoop
-    'for' space? word space? 'in' space? word space? ':' newLine ([\t]+ exp)+ <ForLoop>
+    'for' space? word space? 'in' space? word space? ':' newLine ([\t] exp)+ <ForLoop>
   end
 
   rule declareVar
@@ -26,10 +26,6 @@ grammar Sexp
  
   rule callFunction
      lineCache / splitCollection / stripCollection / openFile / (word space? '(' space? ( value space? (',' space? value space? )*)? ')')
-  end
-
-  rule lineCache
-   'linecache.getline' space? '(' (word / string) ',' integer ')' <CloseFile>
   end
   
   rule parenthesized_letter
@@ -53,7 +49,7 @@ grammar Sexp
   end
 
   rule openFile
-    'open' space? '(' ( word / string ) space? ( ',' space? 'buffering' space? '=' space? integer  )? ( ',' ( ('"' / '\'') ( 'r' / 'w' / 'a' / 'r+' / 'w+' / 'a+' ) ) )? space? ')' <File>
+    'open' space? '(' ( word / string ) space? ( ',' ( ('"' / '\'') ( 'r' / 'w' / 'a' / 'r+' / 'w+' / 'a+' ) ) )? space? ')' <File>
   end
     
   rule writeFile
@@ -65,7 +61,7 @@ grammar Sexp
   end
 
   rule array
-    '[' (value (',' value)*)? ']' <ArrayLiteral>
+    '[' value (',' value)* ']' <ArrayLiteral>
   end
   rule integer
     ('+' / '-')? [0-9]+ <IntegerLiteral>

@@ -8,7 +8,8 @@ class Rupy
       r = Result.new(1,tree.inspect)
       return r
     rescue Exception => error
-      r = Result.new(0,error)
+    	p error
+      r = Result.new(0,"error.to_s")
       return r
     end
   end
@@ -16,14 +17,12 @@ class Rupy
   def self.readMultipleLines()
   	puts "Para dejar de escribir ingresa \"Rupy!\""
   	input= ""
-    tmp_input = ""
-  	while(not tmp_input == "Rupy!\n")
+  	while(tmp_input != "Rupy!")
   		tmp_input = gets
-  		if(not tmp_input == "Rupy!\n")
+  		if(tmp_input != "Rupy!")
   			input = input + tmp_input
   		end
   	end
-    return input
   end
 end
 
